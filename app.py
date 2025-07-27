@@ -12,10 +12,9 @@ app = Flask(__name__)
 app.secret_key="Yugansh@12"
 current_dir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://mad1_project_user:BuEZ8A6pbNKZU7jWrHQWetjUMhZHU8Aw@dpg-d22vepngi27c73fd9s7g-a/mad1_project"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy()
 db.init_app(app)
-with app.app_context():
-    db.create_all()
 app.app_context().push()
 
 class User_Details(db.Model):
@@ -57,6 +56,10 @@ class Admin_Details(db.Model):
     fullname=db.Column(db.String)
     address=db.Column(db.String)
     pincode=db.Column(db.Integer)
+
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/",methods=["GET","POST"])
 def about():
