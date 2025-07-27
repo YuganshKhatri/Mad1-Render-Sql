@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Edit Profile</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <div class="Image31">
+        <div class="container1">
+            <div class="section1"> 
+                <h3 style="text-align: center;", style="color: royalblue;">Edit Profile</h3>
+                <div class="form1">
+                    <form method="POST" action="/user/{{username}}/edit">
+                        <div>
+                            <label> Username </label>
+                            <input type="text" placeholder="{{ user.Username }}" readonly/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Password </label>
+                            <input type="text" value="{{ user.Password }}" name="pass"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Fullname </label>
+                            <input type="text" value="{{ user.Fullname }}" name="name"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Address </label>
+                            <input type="text" value="{{user.Address}}" name="add"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Pincode </label>
+                            <input type="text" value="{{user.Pincode}}" name="pin"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <button type="submit" class="search">Update</button>
+                        <button class="search" onclick="history.back()">Cancel</button> 
+                    </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

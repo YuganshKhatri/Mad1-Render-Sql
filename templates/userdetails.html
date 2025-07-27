@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>User Details</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <div class="Image31">
+            <input type="checkbox" id="toggle" hidden>
+            <label for="toggle" class="hamburger">&#9776;</label>
+            <label for="toggle" class="overlay"></label>
+            <div class="sidebar">
+                <br>
+                <a href="/user/admin">Parking Lots</a>
+                <a href="/user/details">Users</a>
+                <a href="/admin/editprofile">Edit Profile</a>
+                <a href="/admin/summary">Summary</a>
+                <a href="/login">Logout</a>
+            </div>
+             <div class="container2">
+                <div class="section11">
+                    <div class="scroll">
+                        <h3 style="text-align: center;", style="color: royalblue;">User Details</h3>
+                        <table>
+                        <tr>
+                            <th>User Id</th>
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>Address</th>
+                            <th>Pincode</th>
+                        </tr>
+                        {% if user %}
+                            {% for u in user %}
+                                <tr>
+                                    <td>{{u.User_id}}</td>
+                                    <td>{{u.Username}}</td>
+                                    <td>{{u.Fullname}}</td>
+                                    <td>{{u.Address}}</td>
+                                    <td>{{u.Pincode}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" style="text-align: center;">No Current User Found</td>
+                            </tr>
+                        {% endif %}
+                        </table>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </body>
+</html>

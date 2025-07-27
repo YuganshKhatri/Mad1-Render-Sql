@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Summary</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div class="Image31">
+            <input type="checkbox" id="toggle" hidden>
+            <label for="toggle" class="hamburger">&#9776;</label>
+            <label for="toggle" class="overlay"></label>
+            <div class="sidebar">
+                <br>
+                <a href="/user/{{ username }}">Home</a>
+                <a href="/user/{{username}}/summary">Summary</a>
+                <a href="/user/{{username}}/edit">Edit Profile</a>
+                <a href="/login">Logout</a>
+            </div>
+            <div class="container2">
+                <div class="section11">
+                    <div class="scroll">
+                        <div class="summary">
+                        <h3 style="text-align: center;", style="color: royalblue;">Summary</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Location</th>
+                                    <th>Spot No</th>
+                                    <th>Starting Time</th>
+                                    <th>Ending Time</th>
+                                    <th>Action</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if parking_history %}
+                                    {% for booking in parking_history %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ booking.lot.Name }} - {{ booking.lot.Address }}</td>
+                                            <td>{{ booking.spot_id or 'NA' }}</td>
+                                            <td>{{ booking.start_time or 'Not Started' }}</td>
+                                            <td>{{ booking.end_time  or 'Not released'}}</td>
+                                            <td>{{ booking.status }}</td>
+                                            <td> ₹ {{ booking.cost }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;">No recent history available</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="graph">
+                        <h3>Bookings per Location</h3>
+                        <canvas id="bookingChart"></canvas>
+                    </div> 
+                </div>
+                </div>
+            </div>
+            <script>
+            const ctx = document.getElementById('bookingChart').getContext('2d');
+            const data = {
+                labels: {{ location_labels | tojson }},
+                datasets: [{
+                    label: 'Number of Bookings',
+                    data: {{ booking_counts|tojson }},
+                    backgroundColor: 'royalblue',
+                    borderColor: 'black',
+                    borderWidth: 1
+                }]
+            };
+            new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

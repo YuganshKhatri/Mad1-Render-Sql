@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Sign Up </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script>
+            function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const icon = document.querySelector(".toggle-password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.textContent = "👁️"; 
+            } else {
+                passwordInput.type = "password";
+                icon.textContent = "👁️";
+            }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="content">
+            <div class="Image2">
+            </div>
+            <div class="form">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-message">
+                            {% for category,message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <form action="/signup", method="POST" id="form-creation">
+                    <div>
+                        <h1 style="color: royalblue;"> Sign Up </h1>
+                    </div>
+                    <br>
+                    <div style="text-align: left;">
+                    <div>
+                        <label> Username/E-mail :</label>
+                        <input type="text" name="username" required/>
+                        <br><br>
+                    </div>
+                    <div class="password-container">
+                        <label> Password :</label>
+                        <input type="password" id="password" name="pass" required/>
+                        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                        <br><br>
+                    </div>
+                    <div>
+                        <label> Fullname :</label>
+                        <input type="text" name="name" required/>
+                        <br><br>
+                    </div>
+                    <div>
+                        <label> Address :</label>
+                        <input type="text" name="address" required/>
+                        <br><br>
+                    </div>
+                    <div>
+                        <label> Pincode :</label>
+                        <input type="text" name="pincode" required/>
+                        <br><br>
+                    </div>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <br>
+                <p>Already have an account?</p>
+                <a href="/login">Login</a>
+            </div>
+        </div>
+    </body>
+</html>

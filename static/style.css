@@ -1,0 +1,648 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  width: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+canvas{
+  display: block;
+  margin: 0 auto;
+}
+.Image{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image:url("images/parking.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0px;
+    position: relative;
+}
+.Text {
+    max-width: 850px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.Text h3 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+.Text h4 {
+    font-size: 1.8em;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.Text p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #ddd;
+}
+
+.brand {
+    color: #00BFFF; /* Sky Blue for "SpotMate" */
+}
+.welcome-heading {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3em;
+    color: #ffffff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.top-right-buttons {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 10;
+}
+
+.btn {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    background: rgba(0, 191, 255, 0.8); /* sky blue */
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: royalblue;
+}
+.content {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.Image2{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;
+    background-image:url("images/picture.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(3px);
+    z-index: 1;
+}
+.Image3 {
+    height: 100vh;
+    width: 100%;
+    background-attachment: fixed;
+    background-image: url("images/home.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.Image31 {
+  margin: 0;
+  padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    background-image: url("images/home.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.form{ 
+    background-color: rgba(255,255,255,0.95);
+    position: relative;
+    z-index: 2;
+    color: black;
+    text-align: center;
+    padding: 30px 40px;
+    top: 20%;
+    max-width: 400px;
+    margin: auto;
+    margin-top: -100px;
+    background-color:white; 
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+.formlogin{ 
+    background-color: rgba(255,255,255,0.95);
+    position: relative;
+    z-index: 2;
+    color: black;
+    text-align: center;
+    padding: 30px 40px;
+    top: 20%;
+    max-width: 400px;
+    margin: auto;
+    background-color:white; 
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 1px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+input:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #4A90E2;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+.flash-message {
+  text-align: center;
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.flash-message.created{
+    color:green;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+.password-container {
+  position: relative;
+  width: fit-content;
+}
+
+.password-container input {
+  padding-right: 30px;
+  font-size: 16px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 40%;
+  right: 0px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+}
+
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  background-color: #34495e;
+  color: white;
+  border-radius: 5px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #34495e;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 2;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px 25px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.sidebar a:hover {
+  background-color: #2c3e50;
+}
+
+.main-content {
+  padding: 20px;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  z-index: 1;
+  position: relative;
+}
+#toggle:checked ~ .sidebar {
+  left: 0;
+}
+
+#toggle:checked ~ .main-content {
+  margin-left: 250px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+#toggle:checked ~ .overlay {
+  opacity: 1;
+  visibility: visible;
+}
+.main-content{
+    text-align: center;
+    color: white;
+}
+
+.container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: none;
+}
+
+h2 {
+      color: #004085;
+      margin-bottom: 10px;    
+}
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #dee2e6;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e9ecef;
+      color: #333;
+    }
+
+    .search-bar {
+        height:max-content;
+        max-width: 100%;
+        padding: 4px 10px;
+        font-size: 12px;
+      margin: 20px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .search-bar button {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        width: 100px;
+      padding: 5px 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-bar .search {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .search-bar .clear {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-book {
+        margin-bottom: 10px;
+        margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-book:hover {
+      background-color: #0056b3;
+    }
+
+    .section {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 40px;
+      border-color: #34495e;
+    }
+
+    .section h3 {
+      margin-bottom: 10px;
+      color: royalblue;
+    }
+.wide{
+    height: 20px;
+    margin-bottom: 20px;
+    width: 900px;
+    padding: 5px;
+}
+.search-bar p{
+    height: 40px;
+    font-style: bold;
+    margin-top: 15px;
+    font-size: 19px;
+    width: 500px;
+    color:red;
+}
+
+.container1 {
+    height: auto;
+    width: 700px;
+    max-width: 1000px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.form1 {
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    border-color: #34495e;
+}
+.container2 {
+  margin: 0 auto;
+    height: auto;
+    width: auto;
+    max-width: max-content;
+    background: white;
+    padding: 0;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.section1 h3 {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: royalblue;
+}
+.section11 h3 {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: royalblue;
+}
+.summary{
+  margin-left: -20px;
+}
+.section11{
+  margin: 0;
+  display: flex;
+  justify-content: space-between;          
+  padding: 30px;
+}
+.graph{
+            background: rgba(255, 255, 255, 0.9);
+            width:55%;
+            padding: 20px;
+            border-radius: 10px;
+            display: block;
+            margin-left: 20px;
+            text-align: center;
+            margin: 20px auto;
+}
+@media screen and (max-width: 1000px) {
+            .section1 {
+                flex-direction: column;
+            }
+            .summary, .graph {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+.btn-start, .btn-release {
+                padding: 5px 10px;
+                margin: 2px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+}            
+.btn-start {
+                background-color: #28a745;
+                color: white;
+}
+            
+.btn-release {
+                background-color: #dc3545;
+                color: white;
+            }
+.scroll{
+  margin: 0;
+  padding: 0;
+    max-height: 100vh;
+    border-radius: 10px;
+  overflow-y: auto;
+}
+ .table-container {
+            background: rgba(255, 255, 255, 0.95); /* white background with transparency */
+            padding: 30px;
+            margin: 50px auto;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 10px;
+            overflow-x: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+.btn {
+    padding: 6px 12px;
+    margin-right: 6px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.edit {
+    background-color: royalblue;
+}
+
+.delete {
+    background-color: crimson;
+}
+
+td a {
+    display: inline-block;
+}
+.edit:hover {
+    background-color: #4169e1;
+}
+
+.delete:hover {
+    background-color: #b22222;
+}
+.container5 {
+    height: auto;
+    width: 900px;
+    max-width: max-content;
+    background: white;
+    padding: 20px;
+    border-radius: 10px 10px 10px 10px;
+}
+.parking-lots-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.parking-lot-card {
+    border: 2px solid #0077cc;
+    border-radius: 12px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    width: 400px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.lot-actions {
+    margin: 5px 0;
+}
+
+.edit-link {
+    color: orange;
+    font-weight: bold;
+}
+
+.delete-link {
+    color: red;
+    font-weight: bold;
+}
+
+.occupied-count {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.parking-spots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    justify-items: center;
+}
+
+.spot {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.Started {
+    background-color: #fbb;
+    color: red;
+}
+
+.available {
+    background-color: #bfffcf;
+    color: green;
+}
+.custom-dropdown {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+}
+
+.custom-dropdown:hover {
+    border-color: #0056b3;
+}
+
+.custom-dropdown:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #0056b3;
+}
+
+.dropdown-label {
+    font-size: 25px;
+    margin-right: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+
+
+
+
+

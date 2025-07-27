@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Edit Admin Profile</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <div class="Image31">
+        <div class="container1">
+            <div class="section1"> 
+                <h3 style="text-align: center;", style="color: royalblue;">Edit Admin Profile</h3>
+                <div class="form1">
+                    <form method="POST" action="/admin/editprofile">
+                        <div>
+                            <label> Fullname </label>
+                            <input type="text" placeholder="{{ admin.fullname }}" name="name"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Address </label>
+                            <input type="text" placeholder="{{ admin.address }}" name="add"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Pincode </label>
+                            <input type="text" placeholder="{{ admin.pincode }}" name="pin"/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <button type="submit" >Update</button>
+                            <a href="/user/admin" style="text-decoration: none;">
+                                <button type="button">Cancel</button>
+                            </a> 
+                    </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

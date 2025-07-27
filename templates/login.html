@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+        <script>
+            function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const icon = document.querySelector(".toggle-password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.textContent = "👁️"; 
+            } else {
+                passwordInput.type = "password";
+                icon.textContent = "👁️";
+            }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="content">
+            <div class="Image2">
+            </div>
+            <div class="formlogin">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-message{{category}}">
+                            {% for category,message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <form action="/login", method="POST" id="form-creation">
+                    <div>
+                        <h1 style="color: royalblue;"> Login </h1>
+                    </div>
+                    <br>
+                    <div style="text-align: left;">
+                    <div>
+                        <label> Username/E-mail :</label>
+                        <input type="text" name="username" required/>
+                        <br><br>
+                    </div>
+                    <div class="password-container">
+                        <label> Password :</label>
+                        <input type="password" id="password" name="pass" required/>
+                        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                        <br><br>
+                    </div>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <br>
+                <p> Don't have a account? </p> <a href="/signup">Sign Up</a>
+            </div>
+        </div>
+    </body>
+</html>

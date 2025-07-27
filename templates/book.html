@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Slot Booking</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <div class="Image31">
+        <div class="container1">
+            <div class="section1"> 
+                <h3 style="text-align: center;", style="color: royalblue;">Booking Slot</h3>
+                <div class="form1">
+                    <form method="POST" action="/book/{{ username }}/{{ lot.Lot_Id }}">
+                        <div>
+                            <label> Lot ID </label>
+                            <input type="text" placeholder="{{lot.Lot_Id}}" disabled/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Spot ID </label>
+                            <input type="text" placeholder="{{ spot_id }}" disabled/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> User ID </label>
+                            <input type="text" placeholder="{{user_id}}" disabled/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Vehicle Registration Number </label>
+                            <input type="text" placeholder="DL14CHXXXX" name="veh" required/>
+                            <br><br>
+                        </div>
+                    <div>
+                        <button type="submit" class="search">Book</button>
+                        <button class="search" onclick="history.back()">Cancel</button> 
+                    </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

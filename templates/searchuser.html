@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Search User</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <div class="Image31">
+            <input type="checkbox" id="toggle" hidden>
+            <label for="toggle" class="hamburger">&#9776;</label>
+            <label for="toggle" class="overlay"></label>
+            <div class="sidebar">
+                <br>
+                <a href="/user/admin">Parking Lots</a>
+                <a href="/user/details">Users</a>
+                <a href="/admin/editprofile">Edit Profile</a>
+                <a href="/admin/summary">Summary</a>
+                <a href="/login">Logout</a>
+            </div>
+            <div class="container2">
+                <div class="section11">
+                    <div class="scroll">
+                        <form method="GET" action="/search">
+                          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; font-size: larger;">
+                                <label for="search_by" class="dropdown-label">Search By:</label>
+                                <select name="search_by" id="search_by" class="custom-dropdown">
+                                    <option value="user_id">User Id</option>
+                                    <option value="location">Location</option>
+                                    <option value="lot_name">Parking Lot Name</option>
+                                </select>
+                                <div class="search-bar">
+                                    <input type="text" name="search" placeholder="Enter Search String" />
+                                    <button type="submit">Search</button>
+                                    <a href="/user/admin" style="text-decoration: none;">
+                                        <button type="button">Clear</button>
+                                    </a>
+                                </div>
+                        </div>
+                        </form>
+                        <h3 style="text-align: center;", style="color: royalblue;">User Details</h3>
+                            <table>
+                            <tr>
+                                <th>User Id</th>
+                                <th>Username</th>
+                                <th>Fullname</th>
+                                <th>Address</th>
+                                <th>Pincode</th>
+                            </tr>
+                            {% if user %}
+                                {% for u in user %}
+                                    <tr>
+                                        <td>{{u.User_id}}</td>
+                                        <td>{{u.Username}}</td>
+                                        <td>{{u.Fullname}}</td>
+                                        <td>{{u.Address}}</td>
+                                        <td>{{u.Pincode}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">User Not Found</td>
+                                </tr>
+                            {% endif %}
+                            </table>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </body>
+</html>

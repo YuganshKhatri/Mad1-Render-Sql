@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="Image3">
+            <input type="checkbox" id="toggle" hidden>
+            <label for="toggle" class="hamburger">&#9776;</label>
+            <label for="toggle" class="overlay"></label>
+            <div class="sidebar">
+                <br>
+                <a href="/user/{{ username }}">Home</a>
+                <a href="/user/{{username}}/summary">Summary</a>
+                <a href="/user/{{username}}/edit">Edit Profile</a>
+                <a href="/login">Logout</a>
+            </div>
+            <div class="scroll">
+            <div class="main-content">
+                <h1>Welcome {{username}}</h1>
+            </div>
+
+            <div class="container">
+                <div class="section">
+                    <h3>Recent Parking History</h3>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Location</th>
+                            <th>Spot No</th>
+                            <th>Starting Time</th>
+                            <th>Ending Time</th>
+                            <th>Action</th>
+                        </tr>
+                        {% if parking_history %}
+                            {% for booking in parking_history %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ booking.lot.Name }} - {{ booking.lot.Address }}</td>
+                                <td>{{ booking.spot_id or 'NA' }}</td>
+                                <td>{{ booking.start_time or 'Not Started' }}</td>
+                                <td>{{ booking.end_time  or 'Not released'}}</td>
+                                <td>
+                                    {% if booking.status == "Booked" %}
+                                        <form method="POST" action="/start/{{ booking.id }}">
+                                            <button class="btn-start">Start</button>
+                                        </form>
+                                    {% elif booking.status == "Started" %}
+                                        <form method="POST" action="/release/{{ booking.id }}">
+                                            <button class="btn-release">Release</button>
+                                        </form>
+                                    {% else %}
+                                        Completed
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="6" style="text-align:center;">No recent history available</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </div>
+
+                <form method="POST" action="/search/{{ username }}">
+                    <div class="search-bar">
+                        <p><strong>Search parking by location/pin:</strong></p>
+                        <input type="text" name="search" placeholder="Enter Location to search for" class="Wide" />
+                        <button class="search">Search</button>
+                        <button class="clear">Clear</button>
+                    </div>
+                </form>
+
+                <div class="section">
+                    <h3>Parking Lots</h3>
+                    <table style="height: 20px;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Available Spots</th>
+                            <th>Charges/Hour</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for lot in lots %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ lot.Name }}</td>
+                            <td>{{ lot.Address }}</td>
+                            <td>{{ lot.Available_spots }}</td>
+                            <td>₹ {{ lot.Charges }}</td>
+                            <td><a href="/book/{{ username }}/{{ lot.Lot_Id }}" class="btn-book">Book</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

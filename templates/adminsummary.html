@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Admin Summary</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div class="Image31">
+            <input type="checkbox" id="toggle" hidden>
+            <label for="toggle" class="hamburger">&#9776;</label>
+            <label for="toggle" class="overlay"></label>
+            <div class="sidebar">
+                <br>
+                <a href="/user/admin">Parking Lots</a>
+                <a href="/user/details">Users</a>
+                <a href="/admin/editprofile">Edit Profile</a>
+                <a href="/admin/summary">Summary</a>
+                <a href="/login">Logout</a>
+            </div>
+            <div class="container2">
+                <div class="section11">
+                    <div class="scroll">
+                        <h3> Admin Dashboard</h3>
+                        <h4 style="font-size: 30px; color: red;"> All Reservations </h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User Name</th>
+                                    <th>Lot Name</th>
+                                    <th>Spot</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if enriched_histories %}
+                                    {% for entry in enriched_histories %}
+                                    <tr>
+                                        <th>{{entry.history.id}}</th>
+                                        <th>{{entry.username}}</th>
+                                        <th>{{entry.lotname}}</th>
+                                        <th>{{entry.history.spot_id}}</th>
+                                        <th>{{entry.history.start_time}}</th>
+                                        <th>{{entry.history.end_time}}</th>
+                                        <th>{{entry.history.cost}}</th>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7" style="text-align: center;">No Parking History Found.</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <br>
+                        <div style="max-width: 700px; margin: 0 auto;text-align: center;">
+                            <h4 style="font-size: 30px; color: red;"> Parking Summary </h4>
+                            <canvas id="parkingPieChart" width="400" height="400"></canvas>
+                        </div>
+                        <script>
+                            const piectx = document.getElementById('parkingPieChart').getContext('2d');
+                            const parkingPieChart = new Chart(piectx, {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Occupied', 'Available'],
+                                    datasets: [{
+                                        label: 'Parking Spots',
+                                        data: [{{ occupied }}, {{ available }}],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.6)', // red
+                                             'rgba(75, 192, 192, 0.6)'  // green
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(75, 192, 192, 1)'
+                                        ],
+                                            borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectratio: false
+                                }
+                            });
+                        </script>
+                        <br><br><br>
+                        <div style="max-width: 700px; margin: 0 auto;text-align: center;">
+                            <h4 style="font-size: 30px; color: red;"> Revenue From Each Parking Lot</h4>
+                            <canvas id="revenueChart" width="400px" height="400px"></canvas>
+                        </div>
+                        <script>
+                            const lotNames = {{ lot_names|tojson }};
+                            const revenues = {{ revenues|tojson }};
+                            const ctx = document.getElementById('revenueChart').getContext('2d');
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: lotNames,
+                                    datasets: [{
+                                        label: 'Revenue (₹)',
+                                        data: revenues,
+                                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            title: {
+                                                display: true,
+                                                text: 'Revenue in ₹'
+                                            }
+                                        },
+                                        x: {
+                                            title: {
+                                                display: true,
+                                                text: 'Parking Lot'
+                                            }
+                                        }
+                                    }   
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

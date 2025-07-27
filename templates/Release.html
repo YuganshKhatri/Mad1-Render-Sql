@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Releasing the Spot</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <div class="Image31">
+        <div class="container1">
+            <div class="section1"> 
+                <h3 style="text-align: center;", style="color: royalblue;">Releasing the Spot</h3>
+                <div class="form1">
+                    <form method="POST" action="/release/{{ history_id }}">
+                        <div>
+                            <label> Spot ID </label>
+                            <input type="text" placeholder="{{ Spot_id }}" readonly/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Vehicle Number </label>
+                            <input type="text" placeholder="{{ vehicle }}" readonly/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Parking Time </label>
+                            <input type="text" placeholder="{{ start_time }}" readonly/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Releasing Time </label>
+                            <input type="text" placeholder="{{end_time}}"  readonly/>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label> Total Cost </label>
+                            <input type="text" placeholder=" ₹ {{total_cost}}" readonly/>
+                            <br><br>
+                        </div>
+                    </form>
+                    <div>
+                        <a href="{{ url_for('home',username=session.get('username'))}}" style="text-decoration: none;">
+                            <button type="submit" class="search">Release</button>
+                        </a>
+                        <button class="search" onclick="history.back()">Cancel</button> 
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>
