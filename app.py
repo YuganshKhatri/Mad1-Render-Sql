@@ -61,6 +61,10 @@ class Admin_Details(db.Model):
 with app.app_context():
     db.create_all()
 
+admin=Admin_Details(email="admin@gmail.com",password="admin",fullname="IITM",address="Chennai",pincode=123456)
+db.session.add(admin)
+db.session.commit()
+
 @app.route("/",methods=["GET","POST"])
 def about():
     return render_template("aboutus.html")
